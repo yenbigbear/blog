@@ -1,6 +1,7 @@
 import { pool } from 'config/db';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req:any, res:any){
+const handler = async (req: NextApiRequest, res:NextApiResponse) => {
   switch(req.method){
     case 'GET':
       return await getBlog(req, res);
@@ -11,11 +12,20 @@ export default async function handler(req:any, res:any){
   }
 };
 
-const getBlog = async (req:any, res:any) => {
-  try{
-    const results = await pool.query('select * from blog');
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({error});
-  }
-}
+const getBlog = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  const var1: string = req.query.id?'where `id` = ' + req.query.id:'';
+
+  const results: any = await pool.query(
+    // eslint-disable-next-line max-len
+    'select `id`,`name`, `title`, `content`, date_format(`create_at`, "%Y-%m-%d %T") as create_at  from blog ' + var1
+  );
+  return res.status(200).json(results[0]);
+
+  /*const results: any = await pool.query(
+    'select date_format(`日期`, "%Y-%m-%d") as "日期",`規格`, `原料`  from f1'
+  );*/
+
+};
+
+export default handler;

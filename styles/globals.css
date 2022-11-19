@@ -2,26 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-code > span {
-    font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace !important;
-    text-rendering: optimizelegibility;
-    @apply font-light text-sm;
+.mytable {
+    @apply border text-center text-xl;
 }
 
-.docs :not(pre > div) > code {
-    @apply text-[#c400ec] mx-1 text-sm;
+.mytable > thead > tr {
+    @apply border bg-gray-300 px-2 py-2 font-bold
 }
 
-.docs :not(pre > div) > code::before {
-    content: '`';
+.mytable > tbody > tr > th{
+    @apply px-4 py-4
 }
 
-.docs :not(pre > div) > code::after {
-    content: '`';
+.mytable > tbody > tr {
+    @apply hover:bg-blue-100;
 }
 
-.docs :not(pre > div) .link-code > code {
-    @apply text-[#0074de] hover:text-[#68b5fb];
+.mytable > tbody > tr > td{
+    @apply px-4 py-2 border
 }
 
 h1 {
@@ -42,48 +40,4 @@ h4 {
 
 h5 {
     @apply text-lg font-bold mt-12 mb-6;
-}
-
-.docs > p, .docs > :not(.mdx-component) p {
-    @apply my-5 leading-8 font-light;
-}
-
-.docs details {
-    @apply bg-gray-100 rounded p-6 my-4 border;
-}
-
-.docs > :not(.mdx-component) a {
-    @apply text-[#0074de] hover:text-[#0080f6] transition-all;
-}
-
-ul {
-    @apply ml-4;
-}
-
-ul li::before {
-    content: '-';
-    @apply mr-4 opacity-50;
-}
-
-ol {
-    @apply list-decimal ml-8;
-}
-
-li {
-    @apply my-6 font-light leading-8;
-}
-
-aside {
-    top: calc(2rem + 80px);
-}
-
-.answer-list {
-    counter-reset: answer-list;
-}
-
-.answer-list .answer-list__item::before{
-    counter-increment: answer-list;
-    content: counter(answer-list,upper-alpha)". ";
-    display: inline-block;
-    width: 1.5rem;
 }
